@@ -22,7 +22,7 @@ cd workflows-workshop
 ### Building the docker image locally
 
 ```bash
-docker build -t analytics-workshop:latest .
+docker build -t workflows-workshop:latest .
 ```
 
 ### Testing/Developing the notebooks locally
@@ -31,14 +31,14 @@ docker build -t analytics-workshop:latest .
   docker run --rm \
              -p 8888:8888 \
              -v $PWD/tutorials:/home/jovyan/tutorials \
-             --name analytics-workshop \
-             analytics-workshop:latest 
+             --name workflows-workshop \
+             workflows-workshop:latest 
   ```
   Note: Although the `--rm` option is useful, you have to use it very carefully. When you stop the notebook server, you can lose all of your modifications which hasn't been stored into the mounted folder.
 
 - To attach a terminal to the running container, you can use the following command:
   ```bash
-  docker exec -it analytics-workshop start.sh
+  docker exec -it workflows-workshop start.sh
   ```
   
 More info: https://jupyter-docker-stacks.readthedocs.io/en/latest/using/common.html?highlight=root#alternative-commands
