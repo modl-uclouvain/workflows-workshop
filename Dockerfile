@@ -23,7 +23,6 @@ RUN apt-get update \
     liblapack-dev libblas-dev \
     libhdf5-dev libnetcdf-dev libnetcdff-dev libpnetcdf-dev libxc-dev \
     libfftw3-dev libxml2-dev \
-    mongodb \
     slurmd slurm-client slurmctld \
  && rm -rf /var/lib/apt/lists/*
 
@@ -55,6 +54,7 @@ RUN conda install --quiet --yes \
     # 'matminer' \
     # 'jupyterlab-git' \
     'abipy' \
+    'jupyter-server-proxy' \
     'jupyter_contrib_nbextensions' \
     'jupyter_nbextensions_configurator' \
  && pip install --no-cache-dir jupyter-jsmol fireworks \
@@ -74,6 +74,6 @@ USER $NB_UID
 
 RUN pip install -e pseudo_dojo
 
-
+USER $NB_UID
 WORKDIR $HOME
 

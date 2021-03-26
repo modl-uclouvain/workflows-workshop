@@ -78,6 +78,14 @@ More info: https://jupyter-docker-stacks.readthedocs.io/en/latest/using/common.h
 More information about the command line options: https://jupyter-docker-stacks.readthedocs.io/en/latest/using/common.html#notebook-options
 
 
+## Running the notebook with mongodb server
+
+If the `workflows-workshop:latest` image is available you can run the following command to start the tutorial:
+```bash
+docker-compose up
+```
+
+
 ## Continuous integration (for future usage)
 
 Each commit triggers a build process on GitLab Runner. Besides the latest tag, there will be a unique tag (same that as the value of the git commit) available for explicitly tracking the version of the notebook for cluster deployment.

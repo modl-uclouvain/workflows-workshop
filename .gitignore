@@ -1,3 +1,11 @@
+# mongodb instance folder
+db/
+
+# results of the the notebooks
+tutorials/flow_sic_relax
+tutorials/launcher_*/
+
+
 # Byte-compiled / optimized / DLL files
 __pycache__/
 *.py[cod]
