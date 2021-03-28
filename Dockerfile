@@ -83,3 +83,4 @@ WORKDIR /opt/pseudo_dojo
 RUN pip install -e .
 
 WORKDIR $HOME
+COPY --chown=$NB_UID:$NB_GID tutorials tutorials
