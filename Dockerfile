@@ -3,8 +3,8 @@
 
 FROM jupyter/scipy-notebook AS builder
 
-# Abinit installation
-# ===================
+# Abinit compilation
+# ==================
 # # 1. compiler: gfortran
 # # 2. MPI libraries - choice for Open MPI: mpi-default-dev libopenmpi-dev
 # # 3. math libraries - choice for lapack and blas: liblapack-dev libblas-dev
@@ -40,9 +40,9 @@ LABEL maintainer="Gian-Marco Rignanese <gian-marco.rignanese@uclouvain.be>"
 
 # Abinit installation
 # ===================
-# # 1. MPI libraries - choice for Open MPI: mpi-default libopenmpi
-# # 2. math libraries - choice for lapack and blas: liblapack libblas
-# # 3. mandatory libraries: libhdf5 libnetcdf libnetcdff libpnetcdf libxc libfftw3 libxml2
+# # 1. MPI libraries - choice for Open MPI: mpi-default-bin openmpi-bin libopenmpi3
+# # 2. math libraries - choice for lapack and blas: liblapack3 libblas3
+# # 3. mandatory libraries: libhdf5-103 libnetcdf15 libnetcdff7 libpnetcdf0d libxc5 libfftw3-bin libxml2
 
 USER root
 
@@ -63,7 +63,8 @@ ENV PATH=/opt/abinit/bin:$PATH
 # Install Python 3 packages
 # =========================
 # fireworks's depenecies: flask-paginate gunicorn pymongo
-# pseudo_dojo's depenecies:
+# pseudo_dojo's depenecies: periodic-table-plotter atomicfile
+
 RUN conda install --quiet --yes \
     'abipy' \
     'jupyter-server-proxy' \
@@ -75,6 +76,8 @@ RUN conda install --quiet --yes \
  && fix-permissions "/home/${NB_USER}"
 
 # Pseudo-dojo
+# ===========
+
 COPY --chown=$NB_UID:$NB_GID pseudo_dojo /opt/pseudo_dojo
 WORKDIR /opt/pseudo_dojo
 RUN pip install -e .
