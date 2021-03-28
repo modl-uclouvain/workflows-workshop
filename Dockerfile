@@ -45,7 +45,6 @@ LABEL maintainer="Gian-Marco Rignanese <gian-marco.rignanese@uclouvain.be>"
 # # 3. mandatory libraries: libhdf5 libnetcdf libnetcdff libpnetcdf libxc libfftw3 libxml2
 
 USER root
-WORKDIR /opt/abinit
 
 RUN apt-get update \
  && apt install -y --no-install-recommends \
@@ -53,48 +52,31 @@ RUN apt-get update \
     liblapack3 libblas3 \
     libhdf5-103 libnetcdf15 libnetcdff7 libpnetcdf0d libxc5 \
     libfftw3-bin libxml2 \
-   #  slurmd slurm-client slurmctld \
  && rm -rf /var/lib/apt/lists/*
-
-
-COPY --from=builder /opt/abinit .
-RUN fix-permissions "/opt/abinit"
 
 USER $NB_UID
 
+COPY --chown=$NB_UID:$NB_GID --from=builder /opt/abinit /opt/abinit
+ENV PATH=/opt/abinit/bin:$PATH
+
+
 # Install Python 3 packages
 # =========================
-
+# fireworks's depenecies: flask-paginate gunicorn pymongo
+# pseudo_dojo's depenecies:
 RUN conda install --quiet --yes \
-    # 'ase' \
-    # 'pymatgen' \
-    # 'atomate' \
-    # 'matminer' \
-    # 'jupyterlab-git' \
     'abipy' \
     'jupyter-server-proxy' \
-    'jupyter_contrib_nbextensions' \
-    'jupyter_nbextensions_configurator' \
+    'flask-paginate' 'gunicorn' 'pymongo' \
+    'periodic-table-plotter' 'atomicfile' \
  && pip install --no-cache-dir jupyter-jsmol fireworks \
  && conda clean --all -f -y \
  && fix-permissions "${CONDA_DIR}" \
  && fix-permissions "/home/${NB_USER}"
 
-# # Pseudo-dojo
-# USER root
-# WORKDIR /opt
+# Pseudo-dojo
+COPY --chown=$NB_UID:$NB_GID pseudo_dojo /opt/pseudo_dojo
+WORKDIR /opt/pseudo_dojo
+RUN pip install -e .
 
-# RUN git clone --depth 1 https://github.com/abinit/pseudo_dojo.git \
-#  && cd pseudo_dojo \
-#  && fix-permissions "/opt/pseudo_dojo"
-
-# USER $NB_UID
-
-# RUN pip install -e pseudo_dojo
-
-
-ENV PATH=/opt/abinit/bin:$PATH
-
-USER $NB_UID
 WORKDIR $HOME
-
