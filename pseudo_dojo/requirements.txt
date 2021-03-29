@@ -1,0 +1,14 @@
+monty
+numpy
+scipy
+tabulate
+pandas
+jsonschema
+atomicfile
+periodic_table_plotter
+monty
+ipython
+nbformat
+matplotlib
+seaborn
+abipy>=0.7

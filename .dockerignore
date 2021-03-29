@@ -1,0 +1,9 @@
+**/.git
+
+# mongodb instance folder
+db/
+
+# results of the the notebooks
+tutorials/flow_sic_relax
+tutorials/launcher_*/
+
