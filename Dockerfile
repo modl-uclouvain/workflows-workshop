@@ -82,5 +82,26 @@ COPY --chown=$NB_UID:$NB_GID pseudo_dojo /opt/pseudo_dojo
 WORKDIR /opt/pseudo_dojo
 RUN pip install -e .
 
+# Setup slurm
+# ===========
+
+USER root
+
+RUN apt-get update \
+ && apt install -y --no-install-recommends \
+    slurmd slurm-client slurmctld \
+ && rm -rf /var/lib/apt/lists/*
+
+COPY configs/slurm.conf /etc/slurm-llnl/slurm.conf
+COPY configs/start_slurm.sh  /usr/local/bin/before-notebook.d/
+
+# https://github.com/yuwata/slurm-fedora/blob/master/slurm-setuser.in
+RUN mkdir -p /run/munge \
+ && chown -R jovyan /run/munge /etc/munge /var/lib/munge /var/log/munge \
+ && mkdir -p /var/run/slurm-llnl \
+ && chown -R jovyan /var/run/slurm-llnl /var/lib/slurm-llnl /var/log/slurm-llnl
+
+USER $NB_UID
 WORKDIR $HOME
+
 COPY --chown=$NB_UID:$NB_GID tutorials tutorials
