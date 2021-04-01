@@ -1,7 +1,7 @@
 # https://github.com/jupyter/docker-stacks
 # https://jupyter-docker-stacks.readthedocs.io/en/latest/index.html
 
-FROM jupyter/scipy-notebook AS builder
+FROM jupyter/scipy-notebook:4d9c9bd9ced0 AS builder
 
 # Abinit compilation
 # ==================

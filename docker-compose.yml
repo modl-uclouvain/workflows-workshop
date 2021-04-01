@@ -11,6 +11,7 @@ services:
       - GRANT_SUDO=yes
     ports:
       - 8888:8888
+      - 5000:5000
     depends_on:
       - mongo
     volumes:
