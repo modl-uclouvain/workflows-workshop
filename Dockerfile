@@ -114,9 +114,12 @@ RUN pip install -e .
 # RUN pip install git+https://github.com/fekad/jupyter-fireworks-proxy.git \
 #  && jupyter serverextension enable --sys-prefix jupyter_server_proxy
 
+# temporarily install abiflows from develop repository
+RUN pip install git+https://github.com/gpetretto/abiflows.git@develop
+
 WORKDIR $HOME
 
 COPY --chown=$NB_UID:$NB_GID tutorials tutorials
-COPY --chown=$NB_UID:$NB_GID configs/my_launchpad.yaml .fireworks/
-COPY --chown=$NB_UID:$NB_GID configs/manager.yml configs/scheduler.yml .abinit/abipy/
+COPY --chown=$NB_UID:$NB_GID configs/FW_config.yaml configs/my_launchpad.yaml configs/my_fworker.yaml configs/my_qadapter.yaml configs/SLURM_template.txt .fireworks/
+COPY --chown=$NB_UID:$NB_GID configs/manager.yml configs/scheduler.yml configs/fw_manager.yaml .abinit/abipy/
 

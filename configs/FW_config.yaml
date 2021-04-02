@@ -1,0 +1,8 @@
+PRINT_FW_JSON: True
+LAUNCHPAD_LOC: /home/jovyan/.fireworks/my_launchpad.yaml
+FWORKER_LOC: /home/jovyan/.fireworks/my_fworker.yaml
+QUEUEADAPTER_LOC: /home/jovyan/.fireworks/my_qadapter.yaml
+SUBMIT_SCRIPT_NAME: FW_submit.script
+QUEUE_UPDATE_INTERVAL: 3
+EXCEPT_DETAILS_ON_RERUN: True
+REMOVE_USELESS_DIRS: True
