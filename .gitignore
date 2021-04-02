@@ -1,9 +1,13 @@
+
 # mongodb instance folder
 db/
 
 # results of the the notebooks
 tutorials/flow_sic_relax
 tutorials/launcher_*/
+
+# VSCode IDE
+.vscode
 
 # https://github.com/github/gitignore/blob/master/Global/macOS.gitignore
 # General

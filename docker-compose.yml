@@ -9,6 +9,7 @@ services:
     environment:
       # - NB_UID=1001
       - GRANT_SUDO=yes
+      - OMPI_MCA_btl_vader_single_copy_mechanism=none
     ports:
       - 8888:8888
       - 5000:5000

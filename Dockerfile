@@ -102,6 +102,21 @@ RUN mkdir -p /run/munge \
  && chown -R jovyan /var/run/slurm-llnl /var/lib/slurm-llnl /var/log/slurm-llnl
 
 USER $NB_UID
+
+COPY --chown=$NB_UID:$NB_GID fireworks /opt/fireworks
+WORKDIR /opt/fireworks
+RUN pip install -e .
+
+COPY --chown=$NB_UID:$NB_GID jupyter-fireworks-proxy /opt/jupyter-fireworks-proxy
+WORKDIR /opt/jupyter-fireworks-proxy
+RUN pip install -e .
+
+# RUN pip install git+https://github.com/fekad/jupyter-fireworks-proxy.git \
+#  && jupyter serverextension enable --sys-prefix jupyter_server_proxy
+
 WORKDIR $HOME
 
 COPY --chown=$NB_UID:$NB_GID tutorials tutorials
+COPY --chown=$NB_UID:$NB_GID configs/my_launchpad.yaml .fireworks/
+COPY --chown=$NB_UID:$NB_GID configs/manager.yml configs/scheduler.yml .abinit/abipy/
+

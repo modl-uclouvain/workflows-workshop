@@ -1,0 +1,6 @@
+[submodule "jupyter-fireworks-proxy"]
+	path = jupyter-fireworks-proxy
+	url = https://github.com/fekad/jupyter-fireworks-proxy.git
+[submodule "fireworks"]
+	path = fireworks
+	url = https://github.com/fekad/fireworks.git
