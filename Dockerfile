@@ -96,7 +96,7 @@ RUN conda install --quiet --yes \
     'periodic-table-plotter' 'atomicfile' \
  && pip install --no-cache-dir jupyter-jsmol \
  && pip install --no-cache-dir git+https://github.com/modl-uclouvain/fireworks.git \
- && pip install --no-cache-dir git+https://github.com/modl-uclouvain/jupyter-fireworks-proxy.git \
+ && pip install --no-cache-dir jupyter-fireworks-proxy \
  && pip install --no-cache-dir git+https://github.com/gpetretto/abiflows.git@develop \
  && conda clean --all -f -y \
  && fix-permissions "${CONDA_DIR}" \
