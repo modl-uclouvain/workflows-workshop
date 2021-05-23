@@ -1,0 +1,47 @@
+
+## Local runner ##############
+
+# policy:
+#   autoparal: 0
+
+hardware: &hardware
+  num_nodes: 1
+  sockets_per_node: 1
+  cores_per_socket: 4
+  mem_per_node: 16 Gb
+
+job: &job
+  mpi_runner: "mpirun"
+  # pre_run: "export PATH=$HOME/git_repos/abinit/build_gcc/src/98_main:$PATH"
+
+
+qadapters: # List of `qadapters` objects  (just one in this simplified example)
+  - priority: 2
+    queue:
+      qtype: shell        # "Submit" jobs via the shell.
+      qname: localhost    # "Submit" to the localhost queue
+                        # (it's a fake queue in this case)
+
+    limits:
+      timelimit: 01:00:00   #  Time-limit for each task.
+      max_cores: 4          #  Max number of cores that can be used by a single task.
+      hint_cores:  2
+
+    hardware: *hardware
+    job: *job
+
+
+  - priority: 1
+    queue:
+      qname: debug
+      qtype: slurm
+    limits:
+      timelimit: 2:00:0
+      min_cores: 1
+      max_cores: 2
+      min_mem_per_proc: 1
+    hardware: *hardware
+    job: *job
+
+
+##############################

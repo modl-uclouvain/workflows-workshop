@@ -1,0 +1,11 @@
+_fw_name: CommonAdapter
+_fw_q_type: SLURM
+_fw_template_file: /home/jovyan/.fireworks/SLURM_template.txt
+rocket_launch: rlaunch singleshot
+ntasks: 1
+walltime: '02:0:0'
+queue: debug
+account: null
+job_name: null
+pre_rocket: null
+post_rocket: null

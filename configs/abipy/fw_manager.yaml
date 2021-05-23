@@ -1,0 +1,8 @@
+fw_policy:
+    autoparal: True
+    rerun_same_dir: False
+    allow_local_restart: False
+    mpirun_cmd: mpirun
+    max_restarts: 30
+    abipy_manager: /home/jovyan/.abinit/abipy/manager.yml
+
