@@ -49,7 +49,7 @@ RUN apt-get update \
     slurmd slurm-client slurmctld \
  && rm -rf /var/lib/apt/lists/*
 
-COPY configs/slrum/slurm.conf /etc/slurm-llnl/slurm.conf
+COPY configs/slurm/slurm.conf /etc/slurm-llnl/slurm.conf
 COPY configs/slurm/start_slurm.sh  /usr/local/bin/before-notebook.d/
 
 # https://github.com/yuwata/slurm-fedora/blob/master/slurm-setuser.in
